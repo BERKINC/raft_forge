@@ -1,2 +1,2 @@
-# raft_forge
+# raft-forge
 Minecraft mode
