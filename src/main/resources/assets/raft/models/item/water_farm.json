@@ -1,0 +1,6 @@
+{
+  "parent": "raft:block/water_farm",
+  "textures": {
+    "layer0": "raft:block/barrel_side"
+  }
+}

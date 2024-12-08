@@ -1,0 +1,21 @@
+modLoader = "javafml"
+loaderVersion = "[50,)" # Версия загрузчика Forge
+license = "MIT"
+
+[[mods]]
+modId = "raft"
+version = "1.0"
+displayName = "Raft Mod"
+updateJSONURL = "https://example.com/updates.json"
+displayURL = "https://example.com"
+logoFile = "logo.png"
+credits = "Thanks to Minecraft Forge and all the modders who made this possible."
+authors = "YourName"
+description = "This mod generates rafts for players in an ocean world."
+
+[[dependencies.raft]]
+modId="minecraft"
+mandatory=true
+versionRange="[1.20.6]"
+ordering="NONE"
+side="BOTH"
