@@ -1,6 +1,8 @@
 package com.server.mods;
 
+import com.server.mods.command.CommandRegister;
 import com.server.mods.events.FishingHandler;
+import com.server.mods.world.WorldGenerationHandler;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
@@ -21,33 +23,43 @@ public class Raft {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         modEventBus.addListener(this::commonSetup);
 
-       //  ModBlocks.register(modEventBus); // Регистрация блоков
-
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.register(new FishingHandler());
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
-        LOGGER.info("HELLO FROM COMMON SETUP");
+        LOGGER.info("\n" +
+                " .----------------.  .----------------.  .----------------.  .----------------.\n" +
+                "| .--------------. || .--------------. || .--------------. || .--------------. |\n" +
+                "| |  _______     | || |      __      | || |  _________   | || |  _________   | |\n" +
+                "| | |_   __ \\    | || |     /  \\     | || | |_   ___  |  | || | |  _   _  |  | |\n" +
+                "| |   | |__) |   | || |    / /\\ \\    | || |   | |_  \\_|  | || | |_/ | | \\_|  | |\n" +
+                "| |   |  __ /    | || |   / ____ \\   | || |   |  _|      | || |     | |      | |\n" +
+                "| |  _| |  \\ \\_  | || | _/ /    \\ \\_ | || |  _| |_       | || |    _| |_     | |\n" +
+                "| | |____| |___| | || ||____|  |____|| || | |_____|      | || |   |_____|    | |\n" +
+                "| |              | || |              | || |              | || |              | |\n" +
+                "| '--------------' || '--------------' || '--------------' || '--------------' |\n" +
+                " '----------------'  '----------------'  '----------------'  '----------------'\n");
     }
 
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event) {
-        LOGGER.info("HELLO from server starting");
+        LOGGER.info("\n" +
+                " .----------------.  .----------------.  .----------------.  .----------------.\n" +
+                "| .--------------. || .--------------. || .--------------. || .--------------. |\n" +
+                "| |  _______     | || |      __      | || |  _________   | || |  _________   | |\n" +
+                "| | |_   __ \\    | || |     /  \\     | || | |_   ___  |  | || | |  _   _  |  | |\n" +
+                "| |   | |__) |   | || |    / /\\ \\    | || |   | |_  \\_|  | || | |_/ | | \\_|  | |\n" +
+                "| |   |  __ /    | || |   / ____ \\   | || |   |  _|      | || |     | |      | |\n" +
+                "| |  _| |  \\ \\_  | || | _/ /    \\ \\_ | || |  _| |_       | || |    _| |_     | |\n" +
+                "| | |____| |___| | || ||____|  |____|| || | |_____|      | || |   |_____|    | |\n" +
+                "| |              | || |              | || |              | || |              | |\n" +
+                "| '--------------' || '--------------' || '--------------' || '--------------' |\n" +
+                " '----------------'  '----------------'  '----------------'  '----------------'\n");
     }
 
     @SubscribeEvent
     public void onRegisterCommands(RegisterCommandsEvent event) {
-        event.getDispatcher().register(net.minecraft.commands.Commands.literal("start").executes(context -> {
-            net.minecraft.commands.CommandSourceStack source = context.getSource();
-            if (source.getEntity() instanceof net.minecraft.server.level.ServerPlayer player) {
-                net.minecraft.server.level.ServerLevel oceanWorld = source.getServer().getLevel(net.minecraft.server.level.ServerLevel.OVERWORLD);
-                if (oceanWorld != null) {
-                    net.minecraft.core.BlockPos spawnPos = WorldGenerationHandler.generateRaftForPlayer(oceanWorld, player);
-                    player.teleportTo(oceanWorld, spawnPos.getX() + 0.5, spawnPos.getY(), spawnPos.getZ() + 0.5, player.getYRot(), player.getXRot());
-                }
-            }
-            return 1;
-        }));
+        CommandRegister.registerAll(event);
     }
 }
