@@ -1,5 +1,6 @@
 package com.server.mods.command;
 
+import net.minecraft.server.commands.StopCommand;
 import net.minecraftforge.event.RegisterCommandsEvent;
 
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ public class CommandRegister {
     static {
         // Добавляем все команды в список
         commands.add(new StartCommand());
+        commands.add(new RaftCommand());
 
     }
 
